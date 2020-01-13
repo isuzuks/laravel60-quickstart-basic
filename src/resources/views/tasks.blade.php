@@ -13,7 +13,7 @@
                     @include('common.errors')
 
                     {{-- 新タスクフォーム --}}
-                    <form action="{{ url('task') }}" method="post" class="form-horizontal">
+                    <form action="{{ url('task') }}" method="POST" class="form-horizontal">
                         @csrf
 
                         <div class="form-group">
@@ -57,8 +57,16 @@
                                         <td class="table-text">
                                             <div>{{ $task->name }}</div>
                                         </td>
+                                        {{-- 削除ボタン --}}
                                         <td>
-                                            {{-- TODO: 削除ボタン --}}
+                                        <form action="{{ url('task/' . $task->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-btn fa-trash"></i> 削除
+                                            </button>
+                                        </form>
                                         </td>
                                     </tr>
                                 @endforeach
